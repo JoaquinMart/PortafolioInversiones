@@ -21,7 +21,7 @@ public class InversionAgrupada {
     public InversionAgrupada(String nombre) { this.nombre = nombre; }
 
     public static void setDolarMepActual(double valor) { dolarMepActual = valor; } // OK
-    public double getPrecioDolar() { return dolarMepActual; } // OK
+    public static double getPrecioDolar() { return dolarMepActual; } // OK
 
     public String getNombre() { return nombre; } // OK
     public BigDecimal getPrecioCompra() { return BigDecimal.valueOf(precioPromedio); }

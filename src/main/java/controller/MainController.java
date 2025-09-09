@@ -271,47 +271,51 @@ public class MainController {
         Map<String, InversionAgrupada> mapa = new HashMap<>();
 
         BigDecimal totalInvertidoPesos = BigDecimal.ZERO;
-        BigDecimal valorActualPesos = BigDecimal.ZERO;
-        double totalInvertidoDolares = 0;
-        double valorActualDolares = 0;
+        BigDecimal totalPesos = BigDecimal.ZERO;
+        BigDecimal totalInvertidoDolares = BigDecimal.ZERO;
+        BigDecimal totalDolares = BigDecimal.ZERO;
+
+        BigDecimal dolarMep = BigDecimal.valueOf(InversionAgrupada.getPrecioDolar());
 
         for (Inversion inv : inversiones) {
             String key = inv.getNombre().toLowerCase();
             mapa.putIfAbsent(key, new InversionAgrupada(inv.getNombre()));
             mapa.get(key).acumular(inv);
 
-            // --- Total invertido y valor actual ---
-            if (!inv.isEsDolares()) {
-                BigDecimal invertidoPesos = inv.getPrecioCompra()
-                        .multiply(BigDecimal.valueOf(Math.abs(inv.getCantidad())));
-                BigDecimal actualPesos = inv.getPrecioAccion()
-                        .multiply(BigDecimal.valueOf(Math.abs(inv.getCantidad())));
+            BigDecimal cantidadBD = BigDecimal.valueOf(Math.abs(inv.getCantidad()));
 
-                if (!inv.isVenta()) {
-                    totalInvertidoPesos = totalInvertidoPesos.add(invertidoPesos);
-                    valorActualPesos = valorActualPesos.add(actualPesos);
-                } else {
-                    totalInvertidoPesos = totalInvertidoPesos.subtract(invertidoPesos);
-                    valorActualPesos = valorActualPesos.subtract(actualPesos);
+            if (!inv.isEsDolares()) {
+                BigDecimal invertidoPesos = inv.getPrecioCompra().multiply(cantidadBD);
+                BigDecimal actualPesos = inv.getPrecioAccion().multiply(cantidadBD);
+
+                totalInvertidoPesos = totalInvertidoPesos.add(invertidoPesos);
+                totalPesos = totalPesos.add(actualPesos);
+
+                if (dolarMep.compareTo(BigDecimal.ZERO) > 0) {
+                    totalInvertidoDolares = totalInvertidoDolares.add(
+                            invertidoPesos.divide(dolarMep, 6, RoundingMode.HALF_UP)
+                    );
+                    totalDolares = totalDolares.add(
+                            actualPesos.divide(dolarMep, 6, RoundingMode.HALF_UP)
+                    );
                 }
             } else {
-                double invertidoDolares = Math.abs(inv.getCantidad()) * inv.getPrecioAccionEnDolar();
-                double actualDolares = Math.abs(inv.getCantidad()) *
-                        (inv.getPrecioAccion() != null ? inv.getPrecioAccion().doubleValue() : 0);
+                BigDecimal invertidoDolares = inv.getPrecioCompra().multiply(cantidadBD);
+                BigDecimal actualDolares = inv.getPrecioAccion().multiply(cantidadBD);
 
-                if (!inv.isVenta()) {
-                    totalInvertidoDolares += invertidoDolares;
-                    valorActualDolares += actualDolares;
-                } else {
-                    totalInvertidoDolares -= invertidoDolares;
-                    valorActualDolares -= actualDolares;
+                totalInvertidoDolares = totalInvertidoDolares.add(invertidoDolares);
+                totalDolares = totalDolares.add(actualDolares);
+
+                if (dolarMep.compareTo(BigDecimal.ZERO) > 0) {
+                    totalInvertidoPesos = totalInvertidoPesos.add(invertidoDolares.multiply(dolarMep));
+                    totalPesos = totalPesos.add(actualDolares.multiply(dolarMep));
                 }
             }
         }
 
         // --- Ganancias ---
-        BigDecimal gananciaPesos = valorActualPesos.subtract(totalInvertidoPesos);
-        double gananciaDolares = valorActualDolares - totalInvertidoDolares;
+        BigDecimal gananciaPesos = totalPesos.subtract(totalInvertidoPesos);
+        BigDecimal gananciaDolares = totalDolares.subtract(totalInvertidoDolares);
 
         BigDecimal porcentajeGananciaPesos = BigDecimal.ZERO;
         if (totalInvertidoPesos.compareTo(BigDecimal.ZERO) != 0) {
@@ -319,25 +323,27 @@ public class MainController {
                     .multiply(new BigDecimal("100"));
         }
 
-        double porcentajeGananciaDolares = 0;
-        if (totalInvertidoDolares != 0) {
-            porcentajeGananciaDolares = gananciaDolares / totalInvertidoDolares * 100;
+        BigDecimal porcentajeGananciaDolares = BigDecimal.ZERO;
+        if (totalInvertidoDolares.compareTo(BigDecimal.ZERO) != 0) {
+            porcentajeGananciaDolares = gananciaDolares.divide(totalInvertidoDolares, 4, RoundingMode.HALF_UP)
+                    .multiply(new BigDecimal("100"));
         }
 
         // --- Mostrar en labels ---
-        totalPesosLabel.setText(String.format("$ %,.2f", valorActualPesos));
+        totalPesosLabel.setText(String.format("$ %,.2f", totalPesos));
         gananciaPorcentajePesosLabel.setText(String.format("%,.2f %%", porcentajeGananciaPesos));
-        totalDolaresLabel.setText(String.format("$ %,.2f", valorActualDolares));
+        totalDolaresLabel.setText(String.format("$ %,.2f", totalDolares));
         gananciaPorcentajeDolaresLabel.setText(String.format("%,.2f %%", porcentajeGananciaDolares));
 
         // Colores condicionales
         gananciaPorcentajePesosLabel.getStyleClass().add(gananciaPesos.compareTo(BigDecimal.ZERO) >= 0
                 ? "rendimiento-positivo" : "rendimiento-negativo");
-        gananciaPorcentajeDolaresLabel.getStyleClass().add(gananciaDolares >= 0
+        gananciaPorcentajeDolaresLabel.getStyleClass().add(gananciaDolares.compareTo(BigDecimal.ZERO) >= 0
                 ? "rendimiento-positivo" : "rendimiento-negativo");
 
         tablaInversiones.setItems(FXCollections.observableArrayList(mapa.values()));
     }
+
 
     private boolean mostrarConfirmacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

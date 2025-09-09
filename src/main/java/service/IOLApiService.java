@@ -26,6 +26,13 @@ public class IOLApiService {
 
     public BigDecimal getUltimoValor(String simbolo) throws Exception {
         String respuesta = getCotizacion(simbolo);
+
+        // ✅ Chequear si realmente vino un JSON
+        if (respuesta == null || !respuesta.trim().startsWith("{")) {
+            System.err.println("⚠ Respuesta inesperada de la API para " + simbolo + ": " + respuesta);
+            return BigDecimal.ZERO; // o podrías lanzar una excepción si querés tratarlo afuera
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(respuesta);
         if (node.has("ultimoPrecio")) {
