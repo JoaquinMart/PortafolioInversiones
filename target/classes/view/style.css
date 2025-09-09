@@ -1,0 +1,303 @@
+.root-pane {
+    -fx-background-color: #eef2f8;
+    /*-fx-font-family: "Figtree Light";*/
+    -fx-font-family: "Roboto Medium";
+}
+
+/* Estilo para la barra superior */
+.top-bar {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 0, 2);
+    -fx-padding: 15;
+}
+
+.app-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-fill: #34495e;
+}
+
+/* Estilo para las "cards" o paneles principales */
+.card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+    -fx-padding: 20;
+    -fx-font-family: "Roboto Medium";
+}
+
+/* Estilo para los encabezados */
+.header-text {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-fill: #454f5e;
+    -fx-padding: 0 0 5px 0;
+}
+
+/* RENDIMIENTO TOTAL */
+
+.label-total {
+    -fx-font-size: 20px;
+    -fx-text-fill: #454f5e;
+}
+
+.label-info {
+    -fx-font-size: 18px;
+    -fx-text-fill: #333333;
+}
+
+.label-ganancia {
+    -fx-background-radius: 5px;
+    -fx-font-size: 18px;
+}
+
+.total-box {
+    -fx-padding: 50px 0 0 30px;
+}
+
+.rend-box {
+    -fx-padding: 50px 0 0 30px;
+}
+
+.totales-box {
+    -fx-padding: 0 0 0 20px;
+}
+
+.img-box {
+    -fx-background-color: #e0f2f1;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 50px;
+    -fxpreren-height: 50px;
+}
+
+/* Estilo de la tabla */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-table-cell-border-color: transparent;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 4px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 20px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #fff;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-alignment: left;
+    -fx-padding: 0 0 0 8px;
+    -fx-text-fill: #454f5e;
+}
+
+.table-cell {
+    -fx-padding: 40px 0 0 10px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: #fff;
+    -fx-font-size: 18px !important;
+    -fx-border-width: 0;
+    -fx-font-weight: bold;
+    -fx-text-fill: #454f5e;
+}
+
+.table-cell.nombre-columna {
+    -fx-text-fill: #219cba !important;
+}
+
+.rendimiento-positivo {
+    -fx-font-family: "Figtree Bold";
+    -fx-text-fill: green !important;
+}
+
+.rendimiento-negativo {
+    -fx-font-family: "Figtree Bold";
+    -fx-text-fill: red !important;
+}
+
+.rendimiento {
+    -fx-font-family: "Figtree Bold";
+    -fx-text-fill: #454f5e !important;
+}
+
+/* Estilos de los campos de entrada */
+.text-input {
+    -fx-background-color: #eef2f8;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+    -fx-border-color: #d1d5db;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-prompt-text-fill: #999999;
+}
+
+.text-input:focused {
+    -fx-border-color: #d1d5db;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+
+/* Estilo para las etiquetas de los campos */
+.input-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #454f5e;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 4px;
+}
+
+/* El campo de texto interno del DatePicker */
+.date-picker .text-field,
+.date-picker .date-picker-display-node {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0; /* para que no se vea "doble espacio" */
+}
+
+.date-picker .arrow-button, .combo-box-base .arrow-button {
+    -fx-background-color: transparent;
+}
+
+/* Estilo del ComboBox para que se parezca a los TextField */
+.combo-box-base {
+    -fx-background-color: #fff;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-prompt-text-fill: #999999;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-min-height: 40px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 17px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5); /* Mismo efecto que las "cards" */
+}
+
+/* Estilo del botón de flecha */
+.combo-box-base .arrow-button {
+    -fx-background-color: transparent; /* */
+}
+
+/* Estilo del menú desplegable (la lista de opciones) */
+.combo-box-popup .list-view {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-border-color: #d1d5db;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5); /* Mismo efecto que las "cards" */
+}
+
+/* Estilo de los elementos de la lista */
+.combo-box-popup .list-cell {
+    -fx-padding: 8 10;
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-border-radius: 8;
+}
+
+.combo-box-popup .list-cell:filled:hover {
+    -fx-background-radius: 8;
+    -fx-background-color: #6c8aaa;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-radius: 8;
+    -fx-background-color: #34495e;
+    -fx-border-radius: 8;
+}
+
+/* Estilo para el prompt-text cuando está visible */
+.combo-box-base .label {
+    -fx-text-fill: #999999;
+}
+
+.combo-box-base:focused .label {
+    -fx-text-fill: black;
+}
+
+/* Estilo para el ComboBox al hacer hover */
+.combo-box-base:hover {
+    -fx-background-color: #e2eaf2;
+}
+
+/* Estilo para el ComboBox cuando está en foco */
+.combo-box-base:focused {
+    -fx-background-color: #e2eaf2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5); /* Mismo efecto de sombra que las tarjetas */
+}
+
+/* Estilos de los botones */
+.button-primary {
+    -fx-background-color: #0891b2;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+.button-primary:hover {
+    -fx-background-color: #0056b3;
+}
+
+.button-icon-add {
+    -fx-background-color: #0891b2;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.button-icon-add:hover {
+    -fx-background-color: #0056b3;
+}
+
+.button-delete {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+.button-delete:hover {
+    -fx-background-color: #c82333;
+}
+
+/* Fuerzo a que el DatePicker no tome el estilo de combo-box-base */
+.date-picker {
+    -fx-background-color: #eef2f8 !important;
+    -fx-background-radius: 8 !important;
+    -fx-border-color: #d1d5db !important;
+    -fx-border-width: 1 !important;
+    -fx-border-radius: 8 !important;
+    -fx-padding: 8 !important;
+    -fx-font-weight: normal !important; /* para que no herede el bold */
+    -fx-font-size: 16px !important;     /* para que no se vea gigante */
+    -fx-effect: none !important;        /* saca la sombra que le da combo-box-base */
+}
+
+/* Hacemos que el campo de texto interno del DatePicker sea transparente */
+.date-picker .date-picker-display-node {
+    -fx-background-color: transparent !important;
+}
+
+/* Hacemos que el botón de la flecha sea transparente y sin borde */
+.date-picker .arrow-button {
+    -fx-background-color: transparent !important;
+    -fx-border-width: 0 !important;
+}
+
+/* Estilo de foco para que coincida con el TextField */
+.date-picker:focused {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5) !important;
+    -fx-border-color: #d1d5db !important;
+}

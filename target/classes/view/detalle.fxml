@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefWidth="1200"
+            prefHeight="810"
+            fx:controller="controller.DetalleController">
+
+        <TableView fx:id="tablaDetalle" layoutX="10" layoutY="10" styleClass="card" prefWidth="1200" prefHeight="750">
+            <columns>
+                <TableColumn fx:id="colNombre" text="Nombre" prefWidth="100" styleClass="nombre-columna"/>
+                <TableColumn fx:id="colPrecioCompra" text="Precio" prefWidth="100"/>
+                <TableColumn fx:id="colFechaCompra" text="Fecha" prefWidth="100"/>
+                <TableColumn fx:id="colCantidad" text="Nominales" prefWidth="100"/>
+                <TableColumn fx:id="colPrecioDolar" text="Dolar" prefWidth="100"/>
+                <TableColumn fx:id="getColPrecioAccionDolar" text="En Dolares" prefWidth="100"/>
+                <TableColumn fx:id="colComisionCompra" text="Comision" prefWidth="100"/>
+            </columns>
+        </TableView>
+
+</AnchorPane>

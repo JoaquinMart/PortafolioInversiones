@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane fx:id="rootGrid"
+          xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="controller.InversionController"
+          hgap="10" vgap="5"
+          alignment="CENTER_LEFT"
+          stylesheets="@/view/style.css">
+
+    <padding><Insets top="10"/></padding>
+
+    <ComboBox fx:id="cbTipoInversion" promptText="Compra/Venta" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Compra"/>
+                <String fx:value="Compra en dolares"/>
+                <String fx:value="Venta"/>
+                <String fx:value="Venta en dolares"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Label styleClass="input-label" text="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label styleClass="input-label" text="Cantidad" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label styleClass="input-label" text="Precio Compra/Venta" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    <Label styleClass="input-label" text="Fecha Compra/Venta" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+    <Label styleClass="input-label" text="Precio Dolar" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+    <Label styleClass="input-label" text="Comision Compra/Venta" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+
+    <TextField fx:id="tfNombreInversion" promptText="Nombre" styleClass="text-input" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS"/>
+    <TextField fx:id="tfCantidad" promptText="Cantidad" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS"/>
+    <TextField fx:id="tfPrecioCompra" promptText="Precio Compra" styleClass="text-input" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS"/>
+    <DatePicker fx:id="dpFecha" promptText="Fecha" styleClass="date-picker" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS"/>
+    <TextField fx:id="tfPrecioDolar" promptText="Precio Dólar" styleClass="text-input" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS"/>
+    <TextField fx:id="tfComisionCompra" promptText="Comision Compra" styleClass="text-input" GridPane.columnIndex="5" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS"/>
+    <Button onAction="#agregarInversion" styleClass="button-icon-add" GridPane.columnIndex="6" GridPane.rowIndex="2"
+            maxWidth="40" maxHeight="38" minWidth="40" minHeight="38">
+        <graphic>
+            <SVGPath content="M440-280h80v-160h160v-80H520v-160h-80v160H280v80h160v160Zm40 200q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                     scaleX="0.02" scaleY="0.02" fill="#fff"/>
+        </graphic>
+    </Button>
+</GridPane>
